@@ -1,31 +1,33 @@
-# Hat.Co Order Demo
+# Supply Kanban (QR reorder)
 
-Static demo for the Hat.Co high-conversion quote/order form.
+Phone-scannable kanban for workplace supplies. Print a QR for each bin, scan when stock runs low, and the item moves onto the reorder board.
 
-## Fastest live link
+## How it works
 
-1. Go to https://app.netlify.com/drop
-2. Drag the `hat-co-demo` folder onto the page, or upload `hat-co-demo-live.zip`.
-3. Netlify will create a public preview URL you can send to developers.
+1. **Catalog** — add supplies (name, SKU, location, reorder qty, vendor).
+2. **QR Labels** — print labels and stick them on bins / shelf faces (or classic 2-bin kanban cards).
+3. **Scan** — anyone opens the QR with their phone camera → one-tap **Request reorder**.
+4. **Board** — track **On shelf → Needs reorder → On order**, then mark received when stock arrives.
+5. **Settings** — optional purchasing email (opens a mailto draft on reorder), export/import JSON.
 
-## GitHub Pages
+Data is stored in the browser (`localStorage`). Deploy the static files to a shared URL so every phone hits the same origin if you later add a backend; for this demo each browser keeps its own catalog.
 
-1. Create a new GitHub repository.
-2. Upload these files to the repo root:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `.nojekyll`
-3. In GitHub, go to Settings > Pages.
-4. Set Source to `Deploy from a branch`.
-5. Choose the main branch and root folder.
-6. GitHub will provide a live URL.
+## Run locally
 
-## Vercel
+No build step. Open `index.html` in a browser, or serve the folder:
 
-1. Create a new Vercel project.
-2. Import the repository or upload the folder.
-3. Use the default static settings.
-4. Vercel will provide a live preview URL.
+```bash
+python3 -m http.server 8080
+```
 
-No build step is required.
+Then visit `http://localhost:8080`.
+
+QR links use the current page URL + `#/reorder/<id>`, so serve over HTTP(S) (not `file://`) when testing phone scans on the same network.
+
+## Deploy
+
+Works with Netlify Drop, GitHub Pages, or Vercel (static). Config files `netlify.toml` and `vercel.json` are included.
+
+## Sample data
+
+First load seeds a few warehouse/office supplies so you can try the board and labels immediately. Reset anytime from Settings.

@@ -3,380 +3,86 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hat.Co Order Demo</title>
+    <title>Supply Kanban — Scan to reorder</title>
+    <meta name="description" content="QR-code kanban for workplace supplies. Scan a bin label on your phone to request a reorder.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Hat.Co home">
-        <span class="brand-mark">H</span>
-        <span>Hat.Co</span>
-      </a>
-      <nav aria-label="Primary">
-        <a href="#builder">Order</a>
-        <a href="#summary">Summary</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="phone" href="tel:16369262777">(636) 926-2777</a>
-    </header>
+    <div class="app-shell" id="app">
+      <header class="topbar" id="topbar">
+        <a class="brand" href="#/board" aria-label="Supply Kanban home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <strong>Supply Kanban</strong>
+            <small>Scan · Request · Restock</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="#/board" data-route="board">Board</a>
+          <a href="#/catalog" data-route="catalog">Catalog</a>
+          <a href="#/labels" data-route="labels">QR Labels</a>
+          <a href="#/settings" data-route="settings">Settings</a>
+        </nav>
+        <button type="button" class="button primary compact" id="addSupplyBtn">Add supply</button>
+      </header>
 
-    <main>
-      <section class="intro" aria-labelledby="page-title">
-        <div class="intro-copy">
-          <p class="eyebrow">Fast custom hat quotes</p>
-          <h1 id="page-title">Order-ready hat quotes without the guesswork.</h1>
-          <p class="lede">Start with the best-selling setup, add your logo, and get a proof before anything goes into production. Not sure what to pick? Choose "Help me choose" and the Hat.Co team will dial it in.</p>
-          <div class="proof-strip" aria-label="Order benefits">
-            <span>No art? No problem.</span>
-            <span>Mix colors and sizes</span>
-            <span>Proof before production</span>
+      <main id="main"></main>
+    </div>
+
+    <dialog class="modal" id="supplyModal" aria-labelledby="modalTitle">
+      <form method="dialog" id="supplyForm" class="modal-card">
+        <header>
+          <h2 id="modalTitle">Add supply</h2>
+          <button type="submit" value="cancel" class="icon-btn" aria-label="Close">×</button>
+        </header>
+        <div class="modal-body">
+          <input type="hidden" name="id" id="fieldId">
+          <label>
+            <span>Name</span>
+            <input name="name" id="fieldName" required placeholder="e.g. Nitrile gloves M" autocomplete="off">
+          </label>
+          <div class="field-row">
+            <label>
+              <span>SKU / code</span>
+              <input name="sku" id="fieldSku" required placeholder="GLV-M-100" autocomplete="off">
+            </label>
+            <label>
+              <span>Location</span>
+              <input name="location" id="fieldLocation" placeholder="Shelf B2 / Bay 3" autocomplete="off">
+            </label>
           </div>
-          <div class="intro-actions">
-            <a class="button primary" href="#builder">Build my hat order</a>
-            <a class="button secondary" href="#contact">Have Hat.Co help me</a>
+          <div class="field-row">
+            <label>
+              <span>Reorder qty</span>
+              <input name="reorderQty" id="fieldReorderQty" type="number" min="1" value="1" required>
+            </label>
+            <label>
+              <span>Unit</span>
+              <input name="unit" id="fieldUnit" placeholder="box, case, roll" value="box">
+            </label>
           </div>
+          <label>
+            <span>Vendor / source</span>
+            <input name="vendor" id="fieldVendor" placeholder="Amazon Business, Grainger…" autocomplete="off">
+          </label>
+          <label>
+            <span>Notes</span>
+            <textarea name="notes" id="fieldNotes" rows="2" placeholder="Preferred brand, link, account #…"></textarea>
+          </label>
         </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hat-scene">
-            <svg viewBox="0 0 520 360" role="img" aria-label="Custom embroidered hat preview">
-              <defs>
-                <linearGradient id="frontPanel" x1="0" x2="1">
-                  <stop offset="0" stop-color="#f4efe2"></stop>
-                  <stop offset="1" stop-color="#ffffff"></stop>
-                </linearGradient>
-              </defs>
-              <path class="cap-shadow" d="M91 250c94 42 284 40 360-6 22 19 17 45-11 56-72 31-282 36-365-5-27-13-20-34 16-45z"></path>
-              <path class="cap-back" d="M96 177c25-73 84-110 171-110 85 0 143 37 166 110-83 42-249 42-337 0z"></path>
-              <path class="cap-front" d="M178 74c58-19 137-14 184 11 24 50 29 108 8 159-42 18-130 22-190 3-17-55-18-114-2-173z"></path>
-              <path class="cap-panel" d="M219 69c35-8 80-6 114 7 12 50 13 105 2 164-26 10-76 12-108 3-12-56-15-116-8-174z"></path>
-              <path class="cap-bill" d="M265 238c80-16 157-9 221 21-63 46-172 61-284 41-45-8-79-23-101-44 45-5 100-10 164-18z"></path>
-              <path class="stitch" d="M259 89c16 18 24 63 24 139"></path>
-              <path class="stitch" d="M201 91c-22 30-30 79-21 145"></path>
-              <path class="stitch" d="M344 96c18 35 24 84 13 139"></path>
-              <rect class="patch" x="224" y="131" width="82" height="54" rx="10"></rect>
-              <text x="265" y="164" text-anchor="middle">LOGO</text>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      <section class="builder-shell" id="builder">
-        <aside class="progress-panel" aria-label="Order progress">
-          <p class="eyebrow">Quote builder</p>
-          <h2>Hat order details</h2>
-          <div class="progress-meter" aria-hidden="true">
-            <span id="progressFill"></span>
-          </div>
-          <p class="progress-copy" id="progressCopy">Step 1 of 7</p>
-          <ol class="steps" id="stepList">
-            <li class="active">Hat style</li>
-            <li>Color & quantity</li>
-            <li>Decoration</li>
-            <li>Artwork</li>
-            <li>Timeline</li>
-            <li>Delivery</li>
-            <li>Contact</li>
-          </ol>
-          <div class="promise">
-            <strong>Art approval included</strong>
-            <p>Every order gets a proof before production, so customers can approve placement, size, and decoration details.</p>
-          </div>
-        </aside>
-
-        <form class="order-form" id="hatForm">
-          <section class="form-step active" data-step="0" aria-labelledby="style-title">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 1</p>
-              <h2 id="style-title">Start with a best-selling hat style.</h2>
-              <p>The default is optimized for most customers: a trucker hat with a strong brand-name blank and flexible logo options.</p>
-            </div>
-            <div class="option-grid hat-grid" role="group" aria-label="Hat styles">
-              <label class="choice-card selected">
-                <input type="radio" name="hatStyle" value="Trucker" checked>
-                <span class="badge">Most popular</span>
-                <span class="mini-hat trucker"></span>
-                <strong>Trucker</strong>
-                <small>Best for businesses, events, giveaways, and retail merch.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="hatStyle" value="Flexfit">
-                <span class="mini-hat flexfit"></span>
-                <strong>Flexfit</strong>
-                <small>Fitted and stretch-fit options for teams and staff.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="hatStyle" value="Beanie">
-                <span class="mini-hat beanie"></span>
-                <strong>Beanie</strong>
-                <small>Cold-weather knit styles with embroidery or patch options.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="hatStyle" value="Dad Cap">
-                <span class="badge quiet">Retail look</span>
-                <span class="mini-hat dad"></span>
-                <strong>Dad cap</strong>
-                <small>Soft, relaxed profile for retail and events.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="hatStyle" value="Baseball">
-                <span class="mini-hat baseball"></span>
-                <strong>Baseball</strong>
-                <small>Structured athletic styles for leagues and clubs.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="hatStyle" value="Snapback">
-                <span class="badge quiet">Premium feel</span>
-                <span class="mini-hat snapback"></span>
-                <strong>Snapback</strong>
-                <small>Flat-bill and streetwear-ready crown shapes.</small>
-              </label>
-            </div>
-            <label class="field full">
-              <span>Specific brand, SKU, or "help me choose"</span>
-              <input name="specificBrand" type="text" placeholder="Example: Richardson 112, Yupoong, Flexfit 110, or help me choose">
-            </label>
-          </section>
-
-          <section class="form-step" data-step="1" aria-labelledby="qty-title">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 2</p>
-              <h2 id="qty-title">Choose quantities that unlock better value.</h2>
-              <p>Most customers start at 48 hats because it gives the team more room for premium decoration and better per-hat pricing.</p>
-            </div>
-            <div class="qty-presets" aria-label="Quantity presets">
-              <button class="preset" type="button" data-qty="24">
-                <strong>24 hats</strong>
-                <span>Starter run</span>
-              </button>
-              <button class="preset selected" type="button" data-qty="48">
-                <strong>48 hats</strong>
-                <span>Best seller</span>
-              </button>
-              <button class="preset" type="button" data-qty="96">
-                <strong>96 hats</strong>
-                <span>Best value</span>
-              </button>
-            </div>
-            <div class="run-list" id="runList">
-              <div class="hat-run">
-                <label class="field">
-                  <span>Color</span>
-                  <select name="color[]">
-                    <option>Black</option>
-                    <option>White</option>
-                    <option>Navy</option>
-                    <option>Charcoal</option>
-                    <option>Heather Gray</option>
-                    <option>Royal</option>
-                    <option>Red</option>
-                    <option>Forest</option>
-                    <option>Khaki</option>
-                    <option>Other / not sure</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Size</span>
-                  <select name="size[]">
-                    <option>Adjustable / OSFM</option>
-                    <option>S/M</option>
-                    <option>L/XL</option>
-                    <option>Youth</option>
-                    <option>Other / not sure</option>
-                  </select>
-                </label>
-                <label class="field qty-field">
-                  <span>Qty</span>
-                  <input name="quantity[]" type="number" min="0" value="48">
-                </label>
-              </div>
-            </div>
-            <button class="button secondary inline" type="button" id="addRun">Add another color</button>
-            <p class="value-note" id="valueNote">Great choice: 48 hats is the recommended starting point for premium custom orders.</p>
-          </section>
-
-          <section class="form-step" data-step="2" aria-labelledby="decor-title">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 3</p>
-              <h2 id="decor-title">Choose the logo finish.</h2>
-              <p>Embroidery is the simplest default. Patches create a higher-end retail look and are a good upsell for merch.</p>
-            </div>
-            <div class="option-grid decor-grid">
-              <label class="choice-card">
-                <input type="checkbox" name="decor" value="Embroidery" checked>
-                <span class="decor-icon">EMB</span>
-                <strong>Embroidery</strong>
-                <small>Clean stitched logo or text.</small>
-              </label>
-              <label class="choice-card">
-                <input type="checkbox" name="decor" value="Print">
-                <span class="decor-icon">PRT</span>
-                <strong>Print</strong>
-                <small>Great for graphic-heavy art.</small>
-              </label>
-              <label class="choice-card">
-                <input type="checkbox" name="decor" value="Patch" id="patchToggle">
-                <span class="badge">Upgrade</span>
-                <span class="decor-icon">PCH</span>
-                <strong>Patch</strong>
-                <small>Leather, PVC, embroidered, or print-and-stitch.</small>
-              </label>
-            </div>
-            <fieldset class="patch-options" id="patchOptions" hidden>
-              <legend>Patch type</legend>
-              <label><input type="checkbox" name="patchType" value="Leather"> Leather</label>
-              <label><input type="checkbox" name="patchType" value="PVC"> PVC</label>
-              <label><input type="checkbox" name="patchType" value="Embroidered"> Embroidered</label>
-              <label><input type="checkbox" name="patchType" value="Print and stitch"> Print and stitch</label>
-            </fieldset>
-            <fieldset class="addon-options">
-              <legend>Popular add-ons</legend>
-              <label><input type="checkbox" name="addon" value="Back stitching"> Back stitching</label>
-              <label><input type="checkbox" name="addon" value="Side stitching"> Side stitching</label>
-              <label><input type="checkbox" name="addon" value="Premium retail finish"> Premium retail finish</label>
-            </fieldset>
-          </section>
-
-          <section class="form-step" data-step="3" aria-labelledby="art-title" id="art">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 4</p>
-              <h2 id="art-title">Upload art now, or let us help.</h2>
-              <p>The quote can move forward even if the artwork is rough. The team will confirm logo placement with a proof before production.</p>
-            </div>
-            <div class="segmented" role="group" aria-label="Artwork readiness">
-              <label><input type="radio" name="artStatus" value="Ready" checked><span>Ready</span></label>
-              <label><input type="radio" name="artStatus" value="Needs work"><span>Needs work</span></label>
-              <label><input type="radio" name="artStatus" value="Not yet"><span>Not yet</span></label>
-            </div>
-            <label class="upload-box">
-              <input type="file" name="artFiles" multiple>
-              <span class="upload-icon">+</span>
-              <strong>Attach logo or reference files</strong>
-              <small>AI, EPS, PDF, PNG, JPG, or screenshots are fine for the demo.</small>
-            </label>
-            <fieldset class="placement-map">
-              <legend>Where should the design go?</legend>
-              <label><input type="checkbox" name="placement" value="Front" checked> Front</label>
-              <label><input type="checkbox" name="placement" value="Left panel"> Left panel</label>
-              <label><input type="checkbox" name="placement" value="Right panel"> Right panel</label>
-              <label><input type="checkbox" name="placement" value="Back"> Back</label>
-              <label><input type="checkbox" name="placement" value="Left side"> Left side</label>
-              <label><input type="checkbox" name="placement" value="Right side"> Right side</label>
-            </fieldset>
-            <label class="field full">
-              <span>Artwork notes</span>
-              <textarea name="artNotes" rows="4" placeholder="Tell us logo colors, size preference, placement notes, or what still needs to be designed."></textarea>
-            </label>
-          </section>
-
-          <section class="form-step" data-step="4" aria-labelledby="timeline-title">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 5</p>
-              <h2 id="timeline-title">Set the deadline.</h2>
-              <p>Standard timing keeps the order smooth. Rush and fixed-event dates are flagged for quick follow-up.</p>
-            </div>
-            <div class="option-grid">
-              <label class="choice-card selected">
-                <input type="radio" name="timeline" value="Standard 5-7 business days" checked>
-                <strong>Standard</strong>
-                <small>5-7 business days after art approval.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="timeline" value="Rush 5 days or less">
-                <strong>Rush</strong>
-                <small>5 days or less. Fee may apply.</small>
-              </label>
-              <label class="choice-card">
-                <input type="radio" name="timeline" value="Specific date">
-                <strong>Specific date</strong>
-                <small>Customer can enter an in-hands date.</small>
-              </label>
-            </div>
-            <label class="field">
-              <span>In-hands date</span>
-              <input name="deadline" type="date">
-            </label>
-          </section>
-
-          <section class="form-step" data-step="5" aria-labelledby="delivery-title">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 6</p>
-              <h2 id="delivery-title">Where should the finished hats go?</h2>
-              <p>Shipping is the default for easy checkout. Local customers can choose pickup instead.</p>
-            </div>
-            <div class="segmented" role="group" aria-label="Delivery method">
-              <label><input type="radio" name="delivery" value="Ship" checked><span>Ship</span></label>
-              <label><input type="radio" name="delivery" value="Pickup"><span>Pickup</span></label>
-            </div>
-            <div class="address-grid" id="shipFields">
-              <label class="field full"><span>Street address</span><input name="street" type="text"></label>
-              <label class="field"><span>City</span><input name="city" type="text"></label>
-              <label class="field"><span>State</span><input name="state" type="text"></label>
-              <label class="field"><span>ZIP</span><input name="zip" type="text"></label>
-            </div>
-            <div class="pickup-box" id="pickupBox" hidden>
-              <strong>Pickup location</strong>
-              <p>4524 South Saint Peters Parkway<br>Saint Peters, MO 63304</p>
-            </div>
-          </section>
-
-          <section class="form-step" data-step="6" aria-labelledby="contact-title" id="contact">
-            <div class="step-heading">
-              <p class="eyebrow">Stage 7</p>
-              <h2 id="contact-title">Get the quote and proof started.</h2>
-              <p>A Hat.Co expert will review the details, recommend the right blank if needed, and confirm the best decoration path.</p>
-            </div>
-            <div class="contact-grid">
-              <label class="field"><span>Name</span><input name="name" type="text" required></label>
-              <label class="field"><span>Phone</span><input name="phone" type="tel" required></label>
-              <label class="field full"><span>Email</span><input name="email" type="email" required></label>
-            </div>
-            <label class="field full">
-              <span>Anything else?</span>
-              <textarea name="notes" rows="4" placeholder="Budget, event name, reorder details, or anything the team should know."></textarea>
-            </label>
-          </section>
-
-          <div class="form-actions">
-            <button class="button secondary" type="button" id="prevBtn">Previous</button>
-            <button class="button primary" type="button" id="nextBtn">Continue</button>
-            <button class="button primary" type="submit" id="submitBtn" hidden>Start my hat quote</button>
-          </div>
-        </form>
-
-        <aside class="summary-panel" id="summary" aria-live="polite">
-          <div class="summary-card">
-            <p class="eyebrow">Recommended order</p>
-            <h2 id="summaryStyle">Trucker hats</h2>
-            <div class="estimate">
-              <span>Planning estimate</span>
-              <strong id="summaryEstimate">$864-$1,200</strong>
-            </div>
-            <dl>
-              <div><dt>Total hats</dt><dd id="summaryQty">24</dd></div>
-              <div><dt>Decoration</dt><dd id="summaryDecor">Embroidery</dd></div>
-              <div><dt>Artwork</dt><dd id="summaryArt">Ready</dd></div>
-              <div><dt>Timeline</dt><dd id="summaryTimeline">Standard 5-7 business days</dd></div>
-              <div><dt>Delivery</dt><dd id="summaryDelivery">Ship</dd></div>
-            </dl>
-            <p class="conversion-tip" id="conversionTip">You are at the recommended 48-hat starting point for premium custom orders.</p>
-            <div class="thresholds">
-              <span id="setupBadge">48+ premium setup</span>
-              <span>Proof before production</span>
-            </div>
-            <a class="button primary summary-cta" href="#contact">Finish quote</a>
-          </div>
-        </aside>
-      </section>
-    </main>
-
-    <dialog id="demoDialog">
-      <div class="dialog-content">
-        <h2>Demo submission captured</h2>
-        <p>This prototype does not send data yet. In production, this is where the order can connect to the Hat.Co form backend, CRM, or sales inbox.</p>
-        <button class="button primary" type="button" id="closeDialog">Close</button>
-      </div>
+        <footer class="modal-actions">
+          <button type="submit" value="cancel" class="button ghost">Cancel</button>
+          <button type="submit" value="save" class="button primary" id="saveSupplyBtn">Save supply</button>
+        </footer>
+      </form>
     </dialog>
 
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
