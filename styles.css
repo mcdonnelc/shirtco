@@ -521,9 +521,25 @@ textarea {
 }
 
 .qr-thumb canvas,
-.qr-thumb img {
+.qr-thumb img,
+.qr-thumb table {
   width: 80px !important;
   height: 80px !important;
+}
+
+.qr-thumb table td {
+  padding: 0 !important;
+}
+
+.qr-box canvas,
+.qr-box img,
+.qr-box table {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+.qr-box table td {
+  padding: 0 !important;
 }
 
 .catalog-body h3 {
