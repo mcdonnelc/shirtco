@@ -213,6 +213,21 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
+function renderQr(host, text, size) {
+  if (!host || typeof QRCode === "undefined") return;
+  host.innerHTML = "";
+  // qrcodejs draws into the host element
+  // eslint-disable-next-line no-new
+  new QRCode(host, {
+    text,
+    width: size,
+    height: size,
+    colorDark: "#13202c",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M,
+  });
+}
+
 function formatRelative(ts) {
   const diff = Date.now() - ts;
   const mins = Math.floor(diff / 60000);
@@ -416,13 +431,7 @@ function renderCatalog(filter = "") {
   search?.addEventListener("input", () => renderCatalog(search.value));
 
   items.forEach((item) => {
-    const host = document.querySelector(`[data-qr-for="${item.id}"]`);
-    if (host && window.QRCode) {
-      host.innerHTML = "";
-      QRCode.toCanvas(reorderUrl(item.id), { width: 80, margin: 1, color: { dark: "#13202c", light: "#0000" } }, (err, canvas) => {
-        if (!err && canvas) host.appendChild(canvas);
-      });
-    }
+    renderQr(document.querySelector(`[data-qr-for="${item.id}"]`), reorderUrl(item.id), 80);
   });
 
   main.querySelectorAll("[data-cat-action]").forEach((btn) => {
@@ -497,13 +506,7 @@ function renderLabels() {
   document.querySelector("#printLabels")?.addEventListener("click", () => window.print());
 
   items.forEach((item) => {
-    const host = document.querySelector(`[data-label-qr="${item.id}"]`);
-    if (host && window.QRCode) {
-      host.innerHTML = "";
-      QRCode.toCanvas(reorderUrl(item.id), { width: 140, margin: 1, color: { dark: "#13202c", light: "#ffffff" } }, (err, canvas) => {
-        if (!err && canvas) host.appendChild(canvas);
-      });
-    }
+    renderQr(document.querySelector(`[data-label-qr="${item.id}"]`), reorderUrl(item.id), 140);
   });
 }
 
