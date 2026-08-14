@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supply Kanban — Scan to reorder</title>
+    <meta name="description" content="QR-code kanban for workplace supplies. Scan a bin label on your phone to request a reorder.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell" id="app">
+      <header class="topbar" id="topbar">
+        <a class="brand" href="#/board" aria-label="Supply Kanban home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <strong>Supply Kanban</strong>
+            <small>Scan · Request · Restock</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="../" class="projects-link">Projects</a>
+          <a href="#/board" data-route="board">Board</a>
+          <a href="#/catalog" data-route="catalog">Catalog</a>
+          <a href="#/labels" data-route="labels">QR Labels</a>
+          <a href="#/settings" data-route="settings">Settings</a>
+        </nav>
+        <button type="button" class="button primary compact" id="addSupplyBtn">Add supply</button>
+      </header>
+
+      <main id="main"></main>
+    </div>
+
+    <dialog class="modal" id="supplyModal" aria-labelledby="modalTitle">
+      <form method="dialog" id="supplyForm" class="modal-card">
+        <header>
+          <h2 id="modalTitle">Add supply</h2>
+          <button type="submit" value="cancel" class="icon-btn" aria-label="Close">×</button>
+        </header>
+        <div class="modal-body">
+          <input type="hidden" name="id" id="fieldId">
+          <label>
+            <span>Name</span>
+            <input name="name" id="fieldName" required placeholder="e.g. Nitrile gloves M" autocomplete="off">
+          </label>
+          <div class="field-row">
+            <label>
+              <span>SKU / code</span>
+              <input name="sku" id="fieldSku" required placeholder="GLV-M-100" autocomplete="off">
+            </label>
+            <label>
+              <span>Location</span>
+              <input name="location" id="fieldLocation" placeholder="Shelf B2 / Bay 3" autocomplete="off">
+            </label>
+          </div>
+          <div class="field-row">
+            <label>
+              <span>Reorder qty</span>
+              <input name="reorderQty" id="fieldReorderQty" type="number" min="1" value="1" required>
+            </label>
+            <label>
+              <span>Unit</span>
+              <input name="unit" id="fieldUnit" placeholder="box, case, roll" value="box">
+            </label>
+          </div>
+          <label>
+            <span>Vendor / source</span>
+            <input name="vendor" id="fieldVendor" placeholder="Amazon Business, Grainger…" autocomplete="off">
+          </label>
+          <label>
+            <span>Notes</span>
+            <textarea name="notes" id="fieldNotes" rows="2" placeholder="Preferred brand, link, account #…"></textarea>
+          </label>
+        </div>
+        <footer class="modal-actions">
+          <button type="submit" value="cancel" class="button ghost">Cancel</button>
+          <button type="submit" value="save" class="button primary" id="saveSupplyBtn">Save supply</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="vendor/qrcode.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

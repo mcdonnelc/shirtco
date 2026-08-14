@@ -1,33 +1,52 @@
-# Supply Kanban (QR reorder)
+# Shirt Co Projects
 
-Phone-scannable kanban for workplace supplies. Print a QR for each bin, scan when stock runs low, and request a reorder from any phone.
+One repository and GitHub Pages site for Shirt Co's internal software.
 
-## How it works
+## Project structure
 
-1. **Catalog** — add supplies (name, SKU, location, reorder qty, vendor).
-2. **QR Labels** — print labels and stick them on bins / shelf faces (or classic 2-bin kanban cards). Each QR embeds the item details, so phones do not need a shared login.
-3. **Scan** — open the QR with a phone camera → **Request reorder** (opens an email draft to purchasing).
-4. **Board** — on the ops / purchasing browser, track **On shelf → Needs reorder → On order**, then mark received when stock arrives.
-5. **Settings** — set purchasing email + team name; export/import JSON to move the catalog between machines.
+```text
+shirtco/
+├── index.html         # Project hub
+├── hub.css            # Shared hub/planning-page styles
+├── supplies/          # Live QR supply kanban
+├── quotes/            # Quoting tool planning space
+└── art/               # Art tracker planning space
+```
 
-Board state lives in the browser (`localStorage`). Reorders from other phones travel via email (or by using the same browser profile). A shared backend can come later if you want live sync.
+Production URLs:
+
+- Hub: `https://mcdonnelc.github.io/shirtco/`
+- Supply Kanban: `https://mcdonnelc.github.io/shirtco/supplies/`
+- Quoting Tool: `https://mcdonnelc.github.io/shirtco/quotes/`
+- Art Tracker: `https://mcdonnelc.github.io/shirtco/art/`
+
+Each tool owns its folder and can evolve independently. Add another tool by creating a new folder with an `index.html`, then add its card to the root hub.
+
+## Supply Kanban
+
+The supply app is a phone-scannable kanban for workplace supplies:
+
+1. Add supplies in **Catalog**.
+2. Print QR labels for bins and shelf faces.
+3. Scan with a phone and request a reorder.
+4. Track **On shelf → Needs reorder → On order**, then mark received.
+
+QR codes embed item details, so phones do not need a shared login. Board state currently lives in each browser's `localStorage`; cross-device reorders travel by email until a shared backend is added.
 
 ## Run locally
 
-No build step. Serve the folder (needed so phone scans resolve to a real URL):
+No build step. Serve the repository root:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Visit `http://localhost:8080` (or your machine’s LAN IP from a phone on the same network).
+Visit `http://localhost:8080`. The Kanban is at `http://localhost:8080/supplies/`.
 
 ## Deploy
 
 Works with Netlify Drop, GitHub Pages, or Vercel (static). Config files `netlify.toml` and `vercel.json` are included.
 
-After deploy, set the purchasing email under Settings, print labels, and stick them on bins.
+After deploy, open the Supply Kanban, set the purchasing email under Settings, and print fresh labels. QR labels must be printed from the production `/supplies/` URL.
 
-## Sample data
-
-First load seeds a few warehouse/office supplies so you can try the board and labels immediately. Reset anytime from Settings. Re-print labels after editing an item so the QR payload stays current.
+The Kanban's first load seeds sample supplies so the workflow can be tested immediately. Reset anytime from Settings; re-print labels after editing an item so the embedded QR payload stays current.
