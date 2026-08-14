@@ -216,8 +216,6 @@ function escapeHtml(value) {
 function renderQr(host, text, size) {
   if (!host || typeof QRCode === "undefined") return;
   host.innerHTML = "";
-  // qrcodejs draws into the host element
-  // eslint-disable-next-line no-new
   new QRCode(host, {
     text,
     width: size,
