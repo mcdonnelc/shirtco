@@ -91,9 +91,16 @@
       <span>Built for the team</span>
     </footer>
     <script>
-      if (location.hash.startsWith("#/reorder/")) {
-        location.replace(`supplies/${location.hash}`);
+      function forwardLegacyReorderLink() {
+        if (location.hash.startsWith("#/reorder/")) {
+          const destination = new URL("supplies/", location.href);
+          destination.hash = location.hash;
+          location.replace(destination);
+        }
       }
+
+      forwardLegacyReorderLink();
+      window.addEventListener("hashchange", forwardLegacyReorderLink);
     </script>
   </body>
 </html>
