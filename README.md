@@ -8,6 +8,7 @@ One repository and GitHub Pages site for Shirt Co's internal software.
 shirtco/
 ├── index.html         # Project hub
 ├── hub.css            # Shared hub/planning-page styles
+├── transfers/         # Live DTF transfer order portal
 ├── supplies/          # Live QR supply kanban
 ├── quotes/            # Quoting tool planning space
 └── art/               # Art tracker planning space
@@ -16,11 +17,25 @@ shirtco/
 Production URLs:
 
 - Hub: `https://mcdonnelc.github.io/shirtco/`
+- Transfer Orders: `https://mcdonnelc.github.io/shirtco/transfers/`
 - Supply Kanban: `https://mcdonnelc.github.io/shirtco/supplies/`
 - Quoting Tool: `https://mcdonnelc.github.io/shirtco/quotes/`
 - Art Tracker: `https://mcdonnelc.github.io/shirtco/art/`
 
 Each tool owns its folder and can evolve independently. Add another tool by creating a new folder with an `index.html`, then add its card to the root hub.
+
+## Transfer Orders
+
+Partner and customer DTF ordering without the email back-and-forth:
+
+1. Build an order by transfer size and quantity (gang sheets are assembled in production).
+2. Live wholesale pricing at $0.03 / $0.025 / $0.02 per square inch, with free shipping at $75.
+3. White-label / blind-ship flags and a packing-slip brand name.
+4. Artwork as a URL (Shopify CDN, Dropbox, Drive) or a dropped PNG that auto-sizes at 300 dpi.
+5. Shop inbox moves jobs New → In print → Shipped.
+6. Partners paste or import a `dtfs.order.v1` JSON payload instead of forwarding Shopify emails.
+
+Rates and the shop notify email are editable under Settings. Pricing math lives in `transfers/pricing.js` and can be checked with `node transfers/pricing.test.js`.
 
 ## Supply Kanban
 
@@ -41,7 +56,7 @@ No build step. Serve the repository root:
 python3 -m http.server 8080
 ```
 
-Visit `http://localhost:8080`. The Kanban is at `http://localhost:8080/supplies/`.
+Visit `http://localhost:8080`. Transfer Orders is at `http://localhost:8080/transfers/`. The Kanban is at `http://localhost:8080/supplies/`.
 
 ## Deploy
 
