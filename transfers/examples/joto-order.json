@@ -1,0 +1,48 @@
+{
+  "schema": "dtfs.order.v1",
+  "partnerOrderId": "JOTO-1042",
+  "source": "shopify",
+  "customer": {
+    "name": "Phil DeSerres",
+    "company": "Joto Imaging Supplies",
+    "email": "pdeserres@jotoimagingsupplies.com",
+    "phone": "18005655686"
+  },
+  "fulfillment": {
+    "whiteLabel": true,
+    "blindShip": true,
+    "packingSlipName": "Joto Imaging Supplies",
+    "rush": false,
+    "unionPrint": false,
+    "notes": "US overflow from Shopify. Ship blind under Joto."
+  },
+  "shipTo": {
+    "name": "Jane Customer",
+    "company": "",
+    "phone": "3145550100",
+    "address1": "4600 S St Peters Pkwy",
+    "address2": "",
+    "city": "St. Charles",
+    "state": "MO",
+    "postalCode": "63304",
+    "country": "US"
+  },
+  "lines": [
+    {
+      "name": "Front logo",
+      "widthIn": 10,
+      "heightIn": 10,
+      "qty": 24,
+      "fileUrl": "https://cdn.shopify.com/s/files/example/front-logo.png",
+      "fileName": "front-logo.png"
+    },
+    {
+      "name": "Left chest",
+      "widthIn": 4,
+      "heightIn": 4,
+      "qty": 24,
+      "fileUrl": "https://cdn.shopify.com/s/files/example/left-chest.png",
+      "fileName": "left-chest.png"
+    }
+  ]
+}
