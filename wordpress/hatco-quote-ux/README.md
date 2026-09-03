@@ -7,7 +7,7 @@ A small WordPress plugin that improves the existing Hat.co Gravity Form without 
 - Converts the broken 40 px color circles into labeled, touch-friendly color cards.
 - Generates single-, two-, and three-color swatches from the existing supplier color names.
 - Gives camo and Realtree options a visible patterned fallback.
-- Shows 12 popular colors initially and provides an explicit **View all N colors** control.
+- Shows 12 popular colors initially and provides a clear **View all N colors** control.
 - Adds mobile-friendly minus/plus quantity controls while preserving the existing number inputs.
 - Adds meaningful headings to the existing four form pages.
 - Adds the confirmed proof workflow: no design tool, proof after quote approval and purchase, and no production before proof approval.
@@ -18,6 +18,15 @@ The plugin targets Gravity Form `2` only on:
 
 - `/get-a-quote/`
 - `/get-a-quote-new-layout/`
+
+Confirmed staging edit locations:
+
+- Gravity Forms: `/wp-admin/admin.php?page=gf_edit_forms&id=2`
+- Elementor page 301: `/wp-admin/post.php?post=301&action=elementor`
+- Existing child-theme behavior: `/wp-content/themes/hello-theme-child/js/order-form.js`
+- Existing child-theme styles: `/wp-content/themes/hello-theme-child/css/global.min.css`
+
+The plugin approach is intentional: it can be tested and rolled back independently without editing the minified child-theme bundle or changing Gravity Forms notifications and entry data.
 
 ## Staging installation
 
