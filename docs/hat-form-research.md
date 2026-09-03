@@ -7,6 +7,7 @@ Last updated: 2026-09-03
 | Site | Purpose | URL | WP Engine environment |
 | --- | --- | --- | --- |
 | Hat.co | Staging / form work | https://hatco2.wpenginepowered.com/ | `hatco2` |
+| Hat.co | Staging quote form | https://hatco2.wpenginepowered.com/get-a-quote/ | `hatco2` |
 | Hat.co | Production | https://hat.co/ | `hatco1` |
 | Hat.co | Development (URL not yet verified) | — | `hatcodev` |
 | Shirt.co | Staging / later form work | https://stlshirtco5.wpenginepowered.com/ | `stlshirtco5` |
@@ -24,6 +25,24 @@ Build a mobile-first hat-ordering experience that:
 4. Can add transparent pricing and payment later without replacing the front half of the flow.
 
 The current Hat.co experience is a lead form, not a checkout. The immediate reported problems are poor mobile usability and color circles that do not expose every available color.
+
+## Verified current staging flow
+
+Mobile audit viewport: 400 × 924 px on 2026-09-03.
+
+- The quote page is a four-step wizard with a numeric progress indicator.
+- Step 1 leads with a Good/Better/Best trucker-hat recommendation:
+  - Good: Richardson 112
+  - Better: YP Classics 6606
+  - Best: Richardson 110
+- Selecting a product progressively reveals color and quantity controls.
+- Other styles (Flexfit, beanies, dad hats, baseball hats, five-panel hats, visors, youth, bucket/boonie, and other) are hidden behind expandable category rows.
+- The mobile layout is single-column and its primary Next action is visually clear.
+- The current circular color controls do not show the entire color range, lack persistent visible color names, and cannot communicate patterned or two-tone hats well.
+- Trust messages shown on the homepage (685+ reviews, five-day turnaround, union certification, and phone support) are not carried into the quote flow.
+- Pricing is inconsistent at the selection stage: at least one product shows a unit price, while the other visible tiers do not provide equivalent pricing context.
+
+Preserve the current form's useful progressive disclosure and Good/Better/Best guidance. Replace its swatches, hidden discovery, inconsistent pricing context, and form-only trust presentation.
 
 ## Competitor findings
 
