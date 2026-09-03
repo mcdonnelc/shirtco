@@ -8,6 +8,10 @@
   --hatco-border: #d5ded8;
 }
 
+body.hatco-quote-ux {
+  overflow-x: clip;
+}
+
 .hatco-quote-ux .wdac-robust-form_wrapper {
   color: var(--hatco-ink);
   margin-inline: auto;
@@ -99,6 +103,7 @@
   background: #fff;
   border: 1px solid var(--hatco-border);
   border-radius: 11px;
+  box-sizing: border-box;
   box-shadow: none;
   display: flex;
   flex-flow: row nowrap;
