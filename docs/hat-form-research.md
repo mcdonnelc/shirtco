@@ -26,6 +26,14 @@ Build a mobile-first hat-ordering experience that:
 
 The current Hat.co experience is a lead form, not a checkout. The immediate reported problems are poor mobile usability and color circles that do not expose every available color.
 
+## Confirmed product decision
+
+- Do not add a customer-facing design tool in the first release.
+- Keep artwork handling simple: upload an existing file, indicate that artwork is already on file, or request help.
+- The current form is a quote request, so its promise must accurately describe the sequence: the customer submits selections, approves the quote and completes purchase, then receives an art proof.
+- Nothing enters production until the customer approves that proof.
+- When direct checkout is added later, keep the same proof-approval promise and move payment into the supported standard-order path.
+
 ## Verified current staging flow
 
 Mobile audit viewport: 400 × 924 px on 2026-09-03.
