@@ -12,6 +12,8 @@
     colorName: ".wdac-form-tooltiptext",
     quantityInput: ".js-wdac-form-products-item-add",
     sizesWrapper: ".wdac-form-products__quality-sizes-wrapper",
+    product: ".wdac-form-item[data-product-id]",
+    quality: "[data-quality-select-id]",
     page: `.gform_page[id^="gform_page_${FORM_ID}_"]`
   };
 
@@ -189,6 +191,129 @@
     }
   }
 
+  function createSizeField(qualityId, size, index) {
+    const field = document.createElement("div");
+    const label = document.createElement("label");
+    const input = document.createElement("input");
+    const inputId = `hatco-qty-${qualityId}-${index}`.replace(
+      /[^a-zA-Z0-9_-]/g,
+      "-"
+    );
+
+    field.className =
+      "wdac-form-products__size js-wdac-proxy-focusable " +
+      "js-wdac-form-products-item-add-wrapper js-wdac-form-size";
+
+    label.className = "wdac-form-products__size-label";
+    label.htmlFor = inputId;
+    label.textContent = size;
+
+    input.id = inputId;
+    input.name = `${qualityId}|${size}`;
+    input.type = "number";
+    input.min = "0";
+    input.placeholder = "0";
+    input.className =
+      "wdac-form-products__size-input js-wdac-form-products-item-add";
+
+    const separator = qualityId.lastIndexOf("|");
+    const productName = qualityId.slice(0, separator);
+    const qualityName = qualityId.slice(separator + 1);
+    const savedProduct = window.WdacProductsObject?.Products?.find(
+      (product) =>
+        product.name === productName && product.quality === qualityName
+    );
+    const savedQuantity = Number.parseInt(savedProduct?.sizes?.[size], 10) || 0;
+    if (savedQuantity > 0) {
+      input.value = String(savedQuantity);
+      field.classList.add("active");
+    }
+
+    field.append(label, input);
+    return field;
+  }
+
+  function createSizesWrapper(qualityId, product) {
+    const wrapper = document.createElement("div");
+    const heading = document.createElement("h4");
+    const help = document.createElement("p");
+    const fields = document.createElement("div");
+
+    wrapper.className = "wdac-form-products__quality-sizes-wrapper";
+    wrapper.dataset.qualityId = qualityId;
+    wrapper.dataset.hatcoSupplier = product.supplier;
+
+    heading.className = "wdac-h4 wdac-form-products__subtitle";
+    heading.textContent = "Select your sizes";
+
+    help.className = "wdac-text-semismall";
+    help.textContent = `Available sizes verified with ${product.supplier}.`;
+
+    fields.className = "wdac-form-products__quality-sizes";
+    product.sizes.forEach((size, index) => {
+      fields.appendChild(createSizeField(qualityId, size, index));
+    });
+
+    wrapper.append(heading, help, fields);
+    return wrapper;
+  }
+
+  function syncVendorSizes(item) {
+    if (item.dataset.hatcoSizesCatalog === "true") {
+      return;
+    }
+
+    const qualities = Array.from(item.querySelectorAll(selectors.quality));
+    const mappedQualities = qualities
+      .map((quality) => {
+        const styleElement = quality.querySelector(
+          ".wdac-form-products__quality-sku"
+        );
+        const styleNumber = styleElement?.textContent
+          .replace(/^(SKU|Style)\s*#?:?\s*/i, "")
+          .trim();
+        const product = window.HatCoQuoteSizes.get(styleNumber);
+
+        if (!styleElement || !styleNumber || !product) {
+          return null;
+        }
+
+        styleElement.textContent = `Style #${styleNumber}`;
+        return {
+          product,
+          qualityId: quality.dataset.qualitySelectId,
+          selected: quality.classList.contains("active")
+        };
+      })
+      .filter(Boolean);
+
+    if (!mappedQualities.length) {
+      return;
+    }
+
+    item.querySelectorAll(".wdac-form-products__sizes").forEach((sizes) => {
+      sizes.remove();
+    });
+
+    const sizesContainer = document.createElement("div");
+    sizesContainer.className = "wdac-form-products__sizes";
+
+    mappedQualities.forEach(({ product, qualityId, selected }) => {
+      const wrapper = createSizesWrapper(qualityId, product);
+      wrapper.classList.toggle("active", selected);
+      sizesContainer.appendChild(wrapper);
+    });
+
+    const colors = item.querySelector(".wdac-form-products__colors");
+    if (colors) {
+      colors.insertAdjacentElement("afterend", sizesContainer);
+    } else {
+      item.appendChild(sizesContainer);
+    }
+
+    item.dataset.hatcoSizesCatalog = "true";
+  }
+
   function addStepHeading(page) {
     if (page.querySelector(".hatco-step-heading")) {
       return;
@@ -215,12 +340,17 @@
 
   function enhance() {
     const wrapper = document.querySelector(selectors.wrapper);
-    if (!wrapper || !window.HatCoQuoteColors) {
+    if (
+      !wrapper ||
+      !window.HatCoQuoteColors ||
+      !window.HatCoQuoteSizes
+    ) {
       return;
     }
 
     addPromisePanel(wrapper);
     addTrustStrip(wrapper);
+    wrapper.querySelectorAll(selectors.product).forEach(syncVendorSizes);
     wrapper.querySelectorAll(selectors.colorGroup).forEach(addColorDisclosure);
     wrapper.querySelectorAll(selectors.sizesWrapper).forEach(enhanceSizesWrapper);
     wrapper.querySelectorAll(selectors.quantityInput).forEach(enhanceQuantity);

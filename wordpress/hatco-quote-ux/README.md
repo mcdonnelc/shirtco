@@ -9,6 +9,11 @@ A small WordPress plugin that improves the existing Hat.co Gravity Form without 
 - Gives camo and Realtree options a visible patterned fallback.
 - Shows 12 popular colors initially and provides a clear **View all N colors** control.
 - Adds mobile-friendly minus/plus quantity controls while preserving the existing number inputs.
+- Rebuilds each product's quantity fields from a vendor-verified style-number
+  catalog, so fitted styles show their real sizes and adjustable/one-size hats
+  do not show generic S/M/L choices.
+- Adds missing quantity fields for visor, youth, and bucket/booney styles.
+- Labels product identifiers as `Style #` to match SanMar and S&S terminology.
 - Adds meaningful headings to the existing four form pages.
 - Adds the confirmed proof workflow: no design tool, proof after quote approval and purchase, and no production before proof approval.
 - Carries turnaround, review, and human artwork-review trust signals into the form.

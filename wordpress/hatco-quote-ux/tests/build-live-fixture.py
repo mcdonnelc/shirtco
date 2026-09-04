@@ -26,6 +26,7 @@ with urlopen(request, timeout=30) as response:
 
 css = read_asset("assets/quote-ux.css")
 color_utils = read_asset("assets/color-utils.js")
+size_catalog = read_asset("assets/size-catalog.js")
 quote_ux = read_asset("assets/quote-ux.js")
 
 html = re.sub(
@@ -38,7 +39,8 @@ html = html.replace("</head>", f"<style>{css}</style></head>", 1)
 html = html.replace(
     "</body>",
     (
-        f"<script>{color_utils}</script><script>{quote_ux}</script>"
+        f"<script>{color_utils}</script><script>{size_catalog}</script>"
+        f"<script>{quote_ux}</script>"
         "<script>window.addEventListener('load',function(){"
         "setTimeout(function(){document.querySelector('#gform_wrapper_2')"
         ".scrollIntoView({block:'start'});},750);});</script></body>"

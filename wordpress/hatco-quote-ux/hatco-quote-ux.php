@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hat.co Quote UX
  * Description: Mobile-first usability enhancements for Hat.co's Gravity Forms quote flow.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Author: Shirt.Co
  * Text Domain: hatco-quote-ux
  */
@@ -47,9 +47,17 @@ function hatco_quote_ux_enqueue_assets(): void
     );
 
     wp_enqueue_script(
+        'hatco-quote-size-catalog',
+        $plugin_url . 'assets/size-catalog.js',
+        array(),
+        (string) filemtime($plugin_path . 'assets/size-catalog.js'),
+        true
+    );
+
+    wp_enqueue_script(
         'hatco-quote-ux',
         $plugin_url . 'assets/quote-ux.js',
-        array('hatco-quote-color-utils'),
+        array('hatco-quote-color-utils', 'hatco-quote-size-catalog'),
         (string) filemtime($plugin_path . 'assets/quote-ux.js'),
         true
     );
