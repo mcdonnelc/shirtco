@@ -264,11 +264,15 @@ body.hatco-quote-ux {
   border: 0;
   box-shadow: none !important;
   display: flex;
-  flex-direction: column;
+  flex: 0 0 100%;
+  flex-direction: row;
   gap: 7px;
+  justify-content: space-between;
+  max-width: none;
   min-width: 0;
   opacity: 1 !important;
   padding: 0;
+  width: 100%;
 }
 
 .hatco-quote-ux .wdac-form-products__size.hatco-size-field.active,
@@ -285,7 +289,11 @@ body.hatco-quote-ux {
   font-weight: 700;
   line-height: 1.15;
   padding: 0;
-  text-align: center;
+  text-align: left;
+}
+
+.hatco-quote-ux .hatco-size-field .hatco-quantity-control {
+  flex: 0 0 auto;
 }
 
 .hatco-quote-ux .hatco-size-field .js-wdac-form-products-item-add,
@@ -306,6 +314,11 @@ body.hatco-quote-ux {
 
 .hatco-quote-ux .hatco-single-size .wdac-form-products__quality-sizes {
   justify-content: flex-start;
+}
+
+.hatco-quote-ux .hatco-single-size .hatco-size-field {
+  flex-basis: auto;
+  width: auto;
 }
 
 .hatco-quote-ux .hatco-single-size .wdac-text-semismall {
