@@ -247,7 +247,9 @@
     heading.textContent = "Select your sizes";
 
     help.className = "wdac-text-semismall";
-    help.textContent = `Available sizes verified with ${product.supplier}.`;
+    help.textContent = product.note
+      ? `${product.note} Sizes verified with ${product.supplier}.`
+      : `Available sizes verified with ${product.supplier}.`;
 
     fields.className = "wdac-form-products__quality-sizes";
     product.sizes.forEach((size, index) => {

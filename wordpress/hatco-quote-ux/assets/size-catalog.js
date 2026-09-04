@@ -11,9 +11,10 @@
 
   const products = {
     "112": {
-      sizes: ["Adjustable"],
+      sizes: ["SM", "OSFM", "XL"],
+      note: "SM and XL are available in select colors.",
       supplier: "S&S Activewear",
-      source: "https://www.ssactivewear.com/p/richardson/112r"
+      source: "https://www.ssactivewear.com/p/richardson/112"
     },
     "6606": {
       sizes: ["Adjustable"],

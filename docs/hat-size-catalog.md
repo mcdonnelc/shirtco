@@ -6,7 +6,7 @@ form does not imply that an adjustable or one-size hat is sold in S/M/L sizes.
 
 | Style | Product | Supplier | Sizes shown on Hat.co |
 | --- | --- | --- | --- |
-| 112 | Richardson Snapback Trucker | S&S Activewear | Adjustable |
+| 112 | Richardson Snapback Trucker | S&S Activewear / SanMar | SM, OSFM, XL (SM/XL limited colors) |
 | 6606 | YP Classics Retro Trucker | S&S Activewear | Adjustable |
 | 110 | Richardson R-Flex Trucker | S&S Activewear | S/M, L/XL |
 | 110M | Flexfit 110 Mesh-Back | S&S Activewear | Adjustable |
@@ -40,8 +40,9 @@ The exact source URL for every row is kept next to its mapping in
 
 - Richardson **110** and Flexfit **110M** are different products. The 110 is
   fitted in S/M and L/XL; the 110M is an adjustable OSFM product.
-- Richardson **112**, **112Y**, and **112XL** are separate supplier styles.
-  The current form carries 112 and 112Y, not 112XL, so it does not offer XL.
+- Richardson **112** is offered by the suppliers as an OSFM core blank with
+  SM and XL in select colors. The form exposes those three adult size choices;
+  youth remains the separate **112Y** card.
 - Richardson **212** is sold in two adjustable crown sizes, S/M and M/L.
 - “Adjustable,” “One Size,” and SanMar's “OSFA” are preserved as distinct
   vendor labels instead of converting every product to a generic label.
