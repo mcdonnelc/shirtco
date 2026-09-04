@@ -1,0 +1,443 @@
+.hatco-quote-ux {
+  --hatco-green: #006939;
+  --hatco-green-dark: #004d2a;
+  --hatco-green-soft: #edf7f1;
+  --hatco-gold: #d4a017;
+  --hatco-ink: #202522;
+  --hatco-muted: #5d6761;
+  --hatco-border: #d5ded8;
+}
+
+body.hatco-quote-ux {
+  overflow-x: clip;
+}
+
+.hatco-quote-ux .wdac-robust-form_wrapper {
+  color: var(--hatco-ink);
+  margin-inline: auto;
+  max-width: 1060px;
+}
+
+.hatco-quote-ux .hatco-proof-promise {
+  align-items: flex-start;
+  background: var(--hatco-green-soft);
+  border: 1px solid #b8d7c5;
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 0 0 20px;
+  padding: 16px;
+}
+
+.hatco-quote-ux .hatco-proof-promise__icon {
+  align-items: center;
+  background: var(--hatco-green);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  flex: 0 0 32px;
+  font-size: 18px;
+  font-weight: 800;
+  height: 32px;
+  justify-content: center;
+}
+
+.hatco-quote-ux .hatco-proof-promise h3 {
+  color: var(--hatco-green-dark);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.25rem, 4vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 5px;
+  text-transform: none;
+}
+
+.hatco-quote-ux .hatco-proof-promise p {
+  color: #32443a;
+  font-size: 0.96rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.hatco-quote-ux .hatco-step-heading {
+  border-bottom: 1px solid var(--hatco-border);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+}
+
+.hatco-quote-ux .hatco-step-heading > span {
+  color: var(--hatco-green);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.hatco-quote-ux .hatco-step-heading h2 {
+  color: var(--hatco-ink);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.65rem, 6vw, 2.25rem);
+  line-height: 1.05;
+  margin: 0 0 5px;
+}
+
+.hatco-quote-ux .hatco-step-heading p {
+  color: var(--hatco-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.hatco-quote-ux .wdac-form-products__quality-colors {
+  display: grid !important;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 10px 0 4px;
+  max-height: none;
+  overflow: visible;
+}
+
+.hatco-quote-ux .wdac-form-products__color.js-wdac-form-color {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--hatco-border);
+  border-radius: 11px;
+  box-sizing: border-box;
+  box-shadow: none;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 9px;
+  height: 54px;
+  justify-content: flex-start;
+  min-width: 0;
+  opacity: 1;
+  padding: 7px 9px;
+  text-align: left;
+  width: 100%;
+}
+
+.hatco-quote-ux .wdac-form-products__color.js-wdac-form-color:hover,
+.hatco-quote-ux .wdac-form-products__color.js-wdac-form-color:focus-within {
+  border-color: var(--hatco-green);
+  box-shadow: 0 0 0 2px rgb(0 105 57 / 14%);
+  opacity: 1;
+}
+
+.hatco-quote-ux .wdac-form-products__color.js-wdac-form-color.active,
+.hatco-quote-ux .wdac-form-products__color.js-wdac-form-color[aria-pressed="true"] {
+  background: var(--hatco-green-soft);
+  border-color: var(--hatco-green);
+  box-shadow: 0 0 0 2px var(--hatco-green);
+}
+
+.hatco-quote-ux .hatco-color-chip {
+  background: var(--hatco-color, #d2d5d3);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #9ba59f;
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+}
+
+.hatco-quote-ux .wdac-form-products__color .wdac-form-tooltiptext {
+  background: transparent;
+  color: var(--hatco-ink);
+  display: -webkit-box;
+  font-size: 0.78rem;
+  font-weight: 700;
+  left: auto;
+  line-height: 1.15;
+  max-width: none;
+  opacity: 1;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+  position: static;
+  text-align: left;
+  transform: none;
+  visibility: visible;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  width: auto;
+}
+
+.hatco-quote-ux .wdac-form-products__color .wdac-form-tooltiptext::after {
+  display: none;
+}
+
+.hatco-quote-ux .wdac-form-products__color input {
+  border-radius: inherit;
+}
+
+.hatco-quote-ux .hatco-colors-collapsed .hatco-color-overflow {
+  display: none;
+}
+
+.hatco-quote-ux .hatco-color-disclosure {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--hatco-green);
+  cursor: pointer;
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 800;
+  margin: 8px 0 20px;
+  padding: 8px 2px;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hatco-quote-ux .hatco-color-disclosure:focus-visible {
+  border-radius: 4px;
+  outline: 3px solid rgb(0 105 57 / 28%);
+  outline-offset: 2px;
+}
+
+.hatco-quote-ux .hatco-quantity-control {
+  align-items: center;
+  border: 1px solid var(--hatco-border);
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-height: 46px;
+  overflow: hidden;
+  width: auto;
+}
+
+.hatco-quote-ux .hatco-quantity-control .js-wdac-form-products-item-add {
+  appearance: textfield;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 44px;
+  margin: 0;
+  padding: 4px !important;
+  text-align: center;
+  flex: 0 0 58px !important;
+  max-width: 58px !important;
+  min-width: 58px !important;
+  width: 58px !important;
+}
+
+.hatco-quote-ux .hatco-quantity-control .js-wdac-form-products-item-add::-webkit-inner-spin-button,
+.hatco-quote-ux .hatco-quantity-control .js-wdac-form-products-item-add::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.hatco-quote-ux .hatco-quantity-button {
+  align-items: center;
+  appearance: none;
+  background: var(--hatco-green-soft);
+  border: 0;
+  box-sizing: border-box !important;
+  color: var(--hatco-green-dark);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 800;
+  flex: 0 0 44px !important;
+  height: 44px !important;
+  justify-content: center;
+  line-height: 1;
+  margin: 0 !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  padding: 0 !important;
+  width: 44px !important;
+}
+
+.hatco-quote-ux .hatco-quantity-button:hover,
+.hatco-quote-ux .hatco-quantity-button:focus-visible {
+  background: #d8ecdf;
+  outline: none;
+}
+
+.hatco-quote-ux .hatco-quantity-button:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--hatco-green);
+}
+
+.hatco-quote-ux .wdac-form-products__quality-sizes {
+  align-items: flex-start;
+  column-gap: 16px;
+  row-gap: 14px;
+}
+
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field {
+  align-items: center;
+  border: 0;
+  box-shadow: none !important;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: row;
+  gap: 7px;
+  justify-content: space-between;
+  max-width: none;
+  min-width: 0;
+  opacity: 1 !important;
+  padding: 0;
+  width: 100%;
+}
+
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field.active,
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field.inactive {
+  border: 0;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.hatco-quote-ux .wdac-form-products__size-label {
+  color: var(--hatco-ink);
+  cursor: default;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  padding: 0;
+  text-align: left;
+}
+
+.hatco-quote-ux .hatco-size-field .hatco-quantity-control {
+  flex: 0 0 auto;
+}
+
+.hatco-quote-ux .hatco-size-field .js-wdac-form-products-item-add,
+.hatco-quote-ux .wdac-form-products__size.active .js-wdac-form-products-item-add {
+  background: #fff !important;
+}
+
+.hatco-quote-ux .hatco-size-field.active .hatco-quantity-control {
+  border-color: var(--hatco-green);
+  box-shadow: 0 0 0 1px var(--hatco-green);
+}
+
+.hatco-quote-ux .wdac-form-products__quality-sizes-wrapper .wdac-form-products__subtitle {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.1rem;
+  margin: 4px 0 2px;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-form-products__quality-sizes {
+  justify-content: flex-start;
+}
+
+.hatco-quote-ux .hatco-single-size .hatco-size-field {
+  flex-basis: auto;
+  width: auto;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-text-semismall {
+  display: none;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-form-products__size-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.hatco-quote-ux .hatco-quote-trust {
+  border-top: 1px solid var(--hatco-border);
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+}
+
+.hatco-quote-ux .hatco-quote-trust li {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: center;
+}
+
+.hatco-quote-ux .hatco-quote-trust strong {
+  color: var(--hatco-green);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.hatco-quote-ux .hatco-quote-trust span {
+  color: var(--hatco-muted);
+  font-size: 0.7rem;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+@media (max-width: 767px) {
+  .hatco-quote-ux .wdac-robust-form_wrapper {
+    margin-inline: -4px;
+  }
+
+  .hatco-quote-ux .wdac-form-products__qualities {
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .hatco-quote-ux .wdac-form-products__quality {
+    min-height: 0;
+  }
+
+  .hatco-quote-ux .gform_page_footer {
+    background: rgb(255 255 255 / 96%);
+    border-top: 1px solid var(--hatco-border);
+    bottom: 0;
+    box-shadow: 0 -8px 20px rgb(24 45 33 / 9%);
+    margin: 24px -12px -12px;
+    padding: 12px;
+    position: sticky;
+    z-index: 20;
+  }
+
+  .hatco-quote-ux .gform_page_footer input[type="button"],
+  .hatco-quote-ux .gform_page_footer input[type="submit"] {
+    min-height: 48px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hatco-quote-ux .wdac-form-products__quality-colors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hatco-quote-ux .wdac-form-products__color .wdac-form-tooltiptext {
+    font-size: 0.84rem;
+  }
+
+  .hatco-quote-ux .hatco-proof-promise {
+    padding: 18px 20px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hatco-quote-ux .wdac-form-products__quality-colors {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hatco-quote-ux *,
+  .hatco-quote-ux *::before,
+  .hatco-quote-ux *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
