@@ -253,6 +253,77 @@ body.hatco-quote-ux {
   box-shadow: inset 0 0 0 3px var(--hatco-green);
 }
 
+.hatco-quote-ux .wdac-form-products__quality-sizes {
+  align-items: flex-start;
+  column-gap: 16px;
+  row-gap: 14px;
+}
+
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field {
+  align-items: center;
+  border: 0;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  opacity: 1 !important;
+  padding: 0;
+}
+
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field.active,
+.hatco-quote-ux .wdac-form-products__size.hatco-size-field.inactive {
+  border: 0;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.hatco-quote-ux .wdac-form-products__size-label {
+  color: var(--hatco-ink);
+  cursor: default;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  padding: 0;
+  text-align: center;
+}
+
+.hatco-quote-ux .hatco-size-field .js-wdac-form-products-item-add,
+.hatco-quote-ux .wdac-form-products__size.active .js-wdac-form-products-item-add {
+  background: #fff !important;
+}
+
+.hatco-quote-ux .hatco-size-field.active .hatco-quantity-control {
+  border-color: var(--hatco-green);
+  box-shadow: 0 0 0 1px var(--hatco-green);
+}
+
+.hatco-quote-ux .wdac-form-products__quality-sizes-wrapper .wdac-form-products__subtitle {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.1rem;
+  margin: 4px 0 2px;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-form-products__quality-sizes {
+  justify-content: flex-start;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-text-semismall {
+  display: none;
+}
+
+.hatco-quote-ux .hatco-single-size .wdac-form-products__size-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .hatco-quote-ux .hatco-quote-trust {
   border-top: 1px solid var(--hatco-border);
   display: grid;

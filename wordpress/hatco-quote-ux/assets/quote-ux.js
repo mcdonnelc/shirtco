@@ -11,6 +11,7 @@
     colorInput: ".js-wdac-checkbox",
     colorName: ".wdac-form-tooltiptext",
     quantityInput: ".js-wdac-form-products-item-add",
+    sizesWrapper: ".wdac-form-products__quality-sizes-wrapper",
     page: `.gform_page[id^="gform_page_${FORM_ID}_"]`
   };
 
@@ -152,17 +153,40 @@
       return;
     }
 
-    const wrapper = input.closest(".js-wdac-form-products-item-add-wrapper");
-    if (!wrapper) {
+    const field = input.closest(".js-wdac-form-products-item-add-wrapper");
+    if (!field) {
       return;
     }
 
-    wrapper.classList.add("hatco-quantity-control");
-    wrapper.insertBefore(createQuantityButton(input, -1), input);
-    wrapper.appendChild(createQuantityButton(input, 1));
+    field.classList.add("hatco-size-field");
+
+    const control = document.createElement("div");
+    control.className = "hatco-quantity-control";
+    input.parentNode.insertBefore(control, input);
+    control.appendChild(createQuantityButton(input, -1));
+    control.appendChild(input);
+    control.appendChild(createQuantityButton(input, 1));
+
     input.setAttribute("inputmode", "numeric");
     input.setAttribute("min", "0");
     input.dataset.hatcoEnhanced = "true";
+  }
+
+  function enhanceSizesWrapper(wrapper) {
+    if (wrapper.dataset.hatcoSizes === "true") {
+      return;
+    }
+
+    wrapper.dataset.hatcoSizes = "true";
+
+    const sizes = wrapper.querySelectorAll(".wdac-form-products__size");
+    if (sizes.length === 1) {
+      wrapper.classList.add("hatco-single-size");
+      const subtitle = wrapper.querySelector(".wdac-form-products__subtitle");
+      if (subtitle) {
+        subtitle.textContent = "How many do you need?";
+      }
+    }
   }
 
   function addStepHeading(page) {
@@ -198,6 +222,7 @@
     addPromisePanel(wrapper);
     addTrustStrip(wrapper);
     wrapper.querySelectorAll(selectors.colorGroup).forEach(addColorDisclosure);
+    wrapper.querySelectorAll(selectors.sizesWrapper).forEach(enhanceSizesWrapper);
     wrapper.querySelectorAll(selectors.quantityInput).forEach(enhanceQuantity);
     wrapper.querySelectorAll(selectors.page).forEach(addStepHeading);
   }
